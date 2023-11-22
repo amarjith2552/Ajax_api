@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<body style="background-image: url('https://png.pngtree.com/thumb_back/fw800/back_our/20190628/ourmid/pngtree-hand-drawn-night-starry-mountains-background-image_275937.jpg'); background-size: cover;">
+        <div class="text-center">
+            <h1 class="text-primary">USER DETAILS</h1>
+                </div>
+            <div id="result" class="row row-cols-lg-3 ">
+                
+            
+            </div>
+</body>
+<script>
+    const request=new XMLHttpRequest()
+    request.open('get','https://jsonplaceholder.typicode.com/users')
+    request.send()
+    console.log(request.readyState);
+    request.onreadystatechange=()=>{
+    if(request.readyState==4){
+        if(request.status>=200 && request.status<300){
+                console.log(request.responseText);
+                let todo = JSON.parse(request.responseText)
+                console.log(todo);
+                todo.forEach(item => {
+                    result.innerHTML+=`
+                    <div class="col-4">
+        <div class="card mt-4 mx-auto shadow"  style="width: 20rem; border-radius: 10px; font-weight: bold; background-image: url('https://getwallpapers.com/wallpaper/full/2/a/d/371908.jpg'); background-size: cover; background-position: center;  color: white;">
+            <h4 class="text-center text-dark" >Card  ${item.id} </h4>
+            <div class="card-body">                    
+              <p>ID : ${item.id}</p>
+              <p>Name : ${item.name}</p>
+              <p>UserName : ${item.username}</p>
+              <p>Email : ${item.email}</p>
+              <p>Address : </p>
+              <div>street : ${item.address.street}</div>
+              <div>suite : ${item.address.suite}</div>
+              <div>city : ${item.address.city}</div>
+              <p>zipcode : ${item.address.zipcode}</p>
+              <p>geo : </p>
+              <div>lat : ${item.address.geo.lat}</div>
+              <p>lng : ${item.address.geo.lng}</p>
+              <p>Phone : ${item.phone}</p>
+              <p>Website : ${item.website}</p>
+              <p>Company : </p>
+              <div>name : ${item.company.name}</div>
+              <div>catchPhrase : ${item.company.catchPhrase}</div>
+              <p>bs : ${item.company.bs}</p>
+        </div>
+        </div>
+        </div> `
+    
+                });
+            }
+            else{
+            alert('failed to connect')
+        }
+        }
+        
+    }
+</script>
+</html>
+
